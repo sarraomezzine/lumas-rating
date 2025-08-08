@@ -53,5 +53,4 @@ const artworkCategories = [
   line-height: 1.5;
   max-width: 480px;
 }
-
 </style>

@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from 'vue'
+import { ref, computed, reactive } from 'vue'
 import StarRating from './StarRating.vue'
 
 const props = defineProps({
@@ -27,6 +27,59 @@ const ratings = reactive(
     return acc
   }, {})
 )
+
+const submissionMessage = ref('')
+const submissionMessageType = ref('success')
+
+// Computed properties
+const hasAnyRating = computed(() => {
+  return Object.values(ratings).some(rating => rating > 0)
+})
+
+const averageRating = computed(() => {
+  const validRatings = Object.values(ratings).filter(rating => rating > 0)
+  if (validRatings.length === 0) return 0
+  return (validRatings.reduce((sum, rating) => sum + rating, 0) / validRatings.length).toFixed(1)
+})
+
+
+const submitRatings = () => {
+  if (!hasAnyRating.value) {
+    submissionMessage.value = 'Please provide at least one rating before submitting.'
+    submissionMessageType.value = 'error'
+    return
+  }
+
+  const submissionData = {
+    ratings: { ...ratings },
+    averageRating: averageRating.value,
+  }
+
+  // Log to console as requested
+  console.log('Rating Submission:', submissionData)
+
+  // Show success message
+  submissionMessage.value = `Ratings submitted successfully!\nAverage: ${averageRating.value}/5`
+  submissionMessageType.value = 'success'
+
+  // Clear message after 3 seconds
+  setTimeout(() => {
+    submissionMessage.value = ''
+  }, 3000)
+}
+
+const resetRatings = () => {
+  Object.keys(ratings).forEach(key => {
+    ratings[key] = 0
+  })
+  submissionMessage.value = 'All ratings have been reset.'
+  submissionMessageType.value = 'info'
+  
+  // Clear message after 2 seconds
+  setTimeout(() => {
+    submissionMessage.value = ''
+  }, 2000)
+}
 </script>
 
 <template>
@@ -46,6 +99,31 @@ const ratings = reactive(
           :id="`rating-${category.key}`"
           v-model="ratings[category.key]"
         />
+      </div>
+    </div>
+
+    <div class="rating-actions">
+      <button
+        type="button"
+        class="submit-button"
+        :disabled="!hasAnyRating"
+        @click="submitRatings"
+      >
+        Submit Ratings
+      </button>
+      <button
+        type="button"
+        class="reset-button"
+        :disabled="!hasAnyRating"
+        @click="resetRatings"
+      >
+        Reset All
+      </button>
+    </div>
+
+    <div class="submission-message-container">
+      <div v-show="submissionMessage" class="submission-message" :class="submissionMessageType">
+        {{ submissionMessage }}
       </div>
     </div>
   </div>
@@ -94,4 +172,93 @@ const ratings = reactive(
   color: #555;
   text-align: center;
 }
+
+.rating-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.submit-button,
+.reset-button {
+  padding: 0.875rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+  touch-action: manipulation;
+}
+
+.submit-button {
+  background: #007acc;
+  color: white;
+}
+
+.submit-button:hover:not(:disabled) {
+  background: #005fa3;
+  transform: translateY(-1px);
+}
+
+.reset-button {
+  background: #6c757d;
+  color: white;
+}
+
+.reset-button:hover:not(:disabled) {
+  background: #545b62;
+  transform: translateY(-1px);
+}
+
+.submit-button:disabled,
+.reset-button:disabled {
+  background: #e9ecef;
+  color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submission-message-container {
+  min-height: 3rem;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submission-message {
+  padding: 0.75rem;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+  width: 100%;
+  transition: opacity 0.3s ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  white-space: pre-line;
+}
+
+.submission-message.success {
+  background: #d1edff;
+  color: #0c5460;
+  border: 1px solid #b8daff;
+}
+
+.submission-message.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.submission-message.info {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
 </style>
