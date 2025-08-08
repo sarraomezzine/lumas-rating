@@ -1,29 +1,54 @@
-# lumas-rating
+# Lumas Art Rating System
 
-This template should help get you started developing with Vue 3 in Vite.
+A comprehensive, reusable star rating component built with Vue 3 and modern best practices. This system allows users to rate artworks across multiple categories with interactive star ratings.
 
-## Recommended IDE Setup
+## Features
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+### Core Functionality
+- **Multi-Category Rating**: Fully configurable rating categories via props - customize for any use case
+- **Interactive Star Rating**: Click to set ratings, hover for visual feedback
+- **Real-time Updates**: Live display of ratings with numerical feedback
+- **Reusable Components**: Modular, composable architecture
 
-## Customize configuration
+### Technical Features
+- **Page-based Architecture**: Clean separation of concerns with dedicated page components
+- **Props-driven Components**: Configurable categories for maximum reusability
+- **Mobile-first Design**: Responsive layout with touch-friendly interactions
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Quick Start
 
-## Project Setup
+### Prerequisites
+- Node.js 20.19.0+ or 22.12.0+
+- npm or yarn
 
-```sh
+### Installation & Setup
+
+1. **Clone and install dependencies**:
+```bash
+git clone git@github.com:sarraomezzine/lumas-rating.git
 npm install
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
+2. **Start development server**:
+```bash
 npm run dev
 ```
 
-### Compile and Minify for Production
-
-```sh
+3. **Build for production**:
+```bash
 npm run build
+```
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── StarRating.vue          # Reusable star rating component
+│   └── ArtworkRating.vue       # Main rating interface
+├── pages/
+│   └── ArtworkRatingPage.vue   # Page-level component with business logic
+responsive design
+├── App.vue                    # Main application shell
+└── main.js                    # Application entry point
 ```
