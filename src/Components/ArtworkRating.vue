@@ -261,4 +261,53 @@ const resetRatings = () => {
   border: 1px solid #c3e6cb;
 }
 
+/* Mobile styles */
+@media (max-width: 768px) {
+  .artwork-rating {
+    width: calc(100vw - 2rem);
+    max-width: none;
+    padding: 1.5rem;
+    margin: 1rem;
+    border-radius: 8px;
+  }
+  
+  .rating-title {
+    font-size: 1.375rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .rating-categories {
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .rating-category {
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .category-label {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  
+  .rating-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .submit-button,
+  .reset-button {
+    width: 100%;
+    max-width: 280px;
+    padding: 1rem 1.5rem;
+    font-size: 1.05rem;
+  }
+  
+  .submission-message {
+    font-size: 0.9rem;
+    padding: 1rem;
+  }
+}
 </style>

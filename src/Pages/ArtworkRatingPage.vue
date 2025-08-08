@@ -53,4 +53,26 @@ const artworkCategories = [
   line-height: 1.5;
   max-width: 480px;
 }
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .artwork-rating-page {
+    width: 100%;
+    max-width: none;
+    padding: 1.5rem 1rem;
+    min-height: calc(100vh - 2rem);
+  }
+  
+  .page-title {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .page-description {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+}
 </style>

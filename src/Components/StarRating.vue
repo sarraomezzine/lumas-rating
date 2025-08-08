@@ -123,4 +123,30 @@ watch(() => props.modelValue, (newValue) => {
   white-space: nowrap;
 }
 
+/* Mobile devices */
+@media (max-width: 768px) {
+  .star-rating {
+    gap: 0.375rem;
+    justify-content: center;
+  }
+  
+  .stars-container {
+    gap: 0.125rem;
+    justify-content: center;
+  }
+  
+  .star-button {
+    font-size: 1.375rem;
+    padding: 0.125rem;
+    min-width: 40px;
+    min-height: 40px;
+  }
+  
+  .rating-display {
+    font-size: 0.875rem;
+    text-align: center;
+    width: 100%;
+  }
+}
+
 </style>
