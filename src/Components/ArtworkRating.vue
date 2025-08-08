@@ -17,6 +17,10 @@ const props = defineProps({
         typeof cat.label === 'string'
       )
     }
+  },
+  maxStars: {
+    type: Number,
+    default: 5,
   }
 })
 
@@ -59,7 +63,7 @@ const submitRatings = () => {
   console.log('Rating Submission:', submissionData)
 
   // Show success message
-  submissionMessage.value = `Ratings submitted successfully!\nAverage: ${averageRating.value}/5`
+  submissionMessage.value = `Ratings submitted successfully!\nAverage: ${averageRating.value}/${props.maxStars}`
   submissionMessageType.value = 'success'
 
   // Clear message after 3 seconds
@@ -97,6 +101,7 @@ const resetRatings = () => {
         </label>
         <StarRating
           :id="`rating-${category.key}`"
+          :max-stars="maxStars"
           v-model="ratings[category.key]"
         />
       </div>
