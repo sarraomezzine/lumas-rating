@@ -1,5 +1,5 @@
 <script setup>
-import ArtworkRating from '../components/ArtworkRating.vue'
+import ArtworkRating from '../Components/ArtworkRating.vue'
 
 // Define categories for artwork rating
 const artworkCategories = [

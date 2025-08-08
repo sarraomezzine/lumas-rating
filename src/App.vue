@@ -1,5 +1,5 @@
 <script setup>
-import ArtworkRatingPage from './pages/ArtworkRatingPage.vue'
+import ArtworkRatingPage from './Pages/ArtworkRatingPage.vue'
 </script>
 
 <template>
